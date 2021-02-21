@@ -1,0 +1,10 @@
+{
+    "name": "Bityield API",
+    "description": "Bityield's main API",
+    "keywords": [
+      "go",
+      "api"
+    ],
+    "website": "https://bityield.finance",
+    "repository": "http://github.com/bityield/bityield-api"
+  }

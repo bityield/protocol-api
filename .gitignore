@@ -1,0 +1,13 @@
+# DEPENDENCIES
+node_modules
+package-lock.json
+.vscode
+log
+
+# Secrets
+.env
+.env.*
+.env.dev
+.env.test
+.env.stage
+.env.prod
