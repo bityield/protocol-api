@@ -27,6 +27,7 @@ func main() {
 
 	// Use Middleware to pass around the db connection
 	r.Use(DatabaseMiddleware(db))
+	r.Use(gin.Logger())
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
