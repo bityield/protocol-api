@@ -5,6 +5,7 @@
       "go",
       "api"
     ],
+    "install" : [ "./..." ],
     "website": "https://bityield.finance",
     "repository": "http://github.com/bityield/bityield-api"
   }

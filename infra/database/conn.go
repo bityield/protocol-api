@@ -11,7 +11,6 @@ import (
 
 // ConnectDatabase kind of explanatory
 func ConnectDatabase() *gorm.DB {
-	// dcs := "host=localhost port=5432 user=postgres dbname=bityield-api sslmode=disable password="
 	db, err := gorm.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatalf("Error opening database: %q", err)
