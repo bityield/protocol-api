@@ -14,7 +14,7 @@ docker-build:
 	@docker build --squash -t $(IMAGE) -f Dockerfile .
 
 run:
-	@./bin/api
+	@PORT=3000 ./bin/api
 
 watch:
 	@air

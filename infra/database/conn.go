@@ -1,8 +1,8 @@
 package database
 
 import (
-	"fmt"
 	"log"
+	"os"
 
 	"github.com/bityield/bityield-api/infra/database/models"
 	"github.com/jinzhu/gorm"
@@ -11,10 +11,10 @@ import (
 
 // ConnectDatabase kind of explanatory
 func ConnectDatabase() *gorm.DB {
-	dcs := "host=localhost port=5432 user=postgres dbname=bityield-api sslmode=disable password="
-	db, err := gorm.Open("postgres", dcs)
+	// dcs := "host=localhost port=5432 user=postgres dbname=bityield-api sslmode=disable password="
+	db, err := gorm.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
-		panic(fmt.Sprintf("failed to connect to [mysql] database"))
+		log.Fatalf("Error opening database: %q", err)
 	}
 
 	if err := db.Debug().DropTableIfExists(&models.Fund{}).Error; err != nil {
@@ -46,13 +46,6 @@ func seed(db *gorm.DB) {
 		if err := db.Debug().Model(&models.Fund{}).Create(&funds[i]).Error; err != nil {
 			log.Fatalf("cannot seed funds table: %v", err)
 		}
-
-		// posts[i].AuthorID = users[i].ID
-
-		// err = db.Debug().Model(&models.Post{}).Create(&posts[i]).Error
-		// if err != nil {
-		// 	log.Fatalf("cannot seed posts table: %v", err)
-		// }
 	}
 
 }
