@@ -9,6 +9,7 @@ import (
 
 	"github.com/bityield/bityield-api/controllers"
 	"github.com/bityield/bityield-api/infra/database"
+	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
@@ -68,5 +69,9 @@ func main() {
 	r.POST("/funds", controllers.CreateFund)
 	r.PATCH("/funds/:id", controllers.UpdateFund)
 
-	r.Run(":" + port)
+	if os.Getenv("ENVIRONMENT") == "production" {
+		log.Fatal(autotls.Run(r, "api.bityield.finance"))
+	} else {
+		r.Run((":" + port))
+	}
 }
