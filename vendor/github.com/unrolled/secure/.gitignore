@@ -21,7 +21,7 @@ _testmain.go
 
 *.exe
 *.test
-*.prof
 
-vendor/*
-!vendor/vendor.json
+*.pem
+.DS_Store
+*.swp

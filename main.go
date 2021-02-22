@@ -9,9 +9,9 @@ import (
 
 	"github.com/bityield/bityield-api/controllers"
 	"github.com/bityield/bityield-api/infra/database"
-	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"github.com/unrolled/secure"
 )
 
 // DatabaseMiddleware for gin to pass DB context around
@@ -45,6 +45,27 @@ func main() {
 		repeat = 5
 	}
 
+	secureMiddleware := secure.New(secure.Options{
+		FrameDeny: true,
+	})
+
+	secureFunc := func() gin.HandlerFunc {
+		return func(c *gin.Context) {
+			err := secureMiddleware.Process(c.Writer, c.Request)
+
+			// If there was an error, do not continue.
+			if err != nil {
+				c.Abort()
+				return
+			}
+
+			// Avoid header rewrite if response is a redirection.
+			if status := c.Writer.Status(); status > 300 && status < 399 {
+				c.Abort()
+			}
+		}
+	}()
+
 	// Set the initial API instance
 	r := gin.Default()
 
@@ -53,8 +74,9 @@ func main() {
 	defer db.Close()
 
 	// Use Middleware to pass around the db connection
-	r.Use(DatabaseMiddleware(db))
 	r.Use(gin.Logger())
+	r.Use(secureFunc)
+	r.Use(DatabaseMiddleware(db))
 
 	// Heroku function
 	r.GET("/repeat", repeatHandler(repeat))
@@ -69,9 +91,5 @@ func main() {
 	r.POST("/funds", controllers.CreateFund)
 	r.PATCH("/funds/:id", controllers.UpdateFund)
 
-	if os.Getenv("ENVIRONMENT") == "production" {
-		log.Fatal(autotls.Run(r, "api.bityield.finance"))
-	} else {
-		r.Run((":" + port))
-	}
+	r.Run((":" + port))
 }

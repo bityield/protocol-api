@@ -9,9 +9,6 @@ github.com/dgrijalva/jwt-go
 github.com/fsnotify/fsnotify
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
-# github.com/gin-gonic/autotls v0.0.3
-## explicit
-github.com/gin-gonic/autotls
 # github.com/gin-gonic/gin v1.6.3
 ## explicit
 github.com/gin-gonic/gin
@@ -100,16 +97,14 @@ github.com/subosito/gotenv
 ## explicit
 # github.com/ugorji/go/codec v1.2.4
 github.com/ugorji/go/codec
+# github.com/unrolled/secure v1.0.8
+## explicit
+github.com/unrolled/secure
 # golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 ## explicit
-golang.org/x/crypto/acme
-golang.org/x/crypto/acme/autocert
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/sha3
-# golang.org/x/net v0.0.0-20210222171744-9060382bd457
-## explicit
-golang.org/x/net/idna
 # golang.org/x/sys v0.0.0-20210220050731-9a76102bfb43
 ## explicit
 golang.org/x/sys/cpu
@@ -117,9 +112,7 @@ golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.5
 ## explicit
-golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
-golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
 # google.golang.org/protobuf v1.25.0
 ## explicit
