@@ -11,7 +11,6 @@ import (
 	"github.com/bityield/bityield-api/infra/database"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/unrolled/secure"
 )
 
 // DatabaseMiddleware for gin to pass DB context around
@@ -45,21 +44,21 @@ func main() {
 		repeat = 5
 	}
 
-	secureFunc := func() gin.HandlerFunc {
-		return func(c *gin.Context) {
-			secureMiddleware := secure.New(secure.Options{
-				SSLRedirect: true,
-			})
+	// secureFunc := func() gin.HandlerFunc {
+	// 	return func(c *gin.Context) {
+	// 		secureMiddleware := secure.New(secure.Options{
+	// 			SSLRedirect: true,
+	// 		})
 
-			// If there was an error, do not continue.
-			if err := secureMiddleware.Process(c.Writer, c.Request); err != nil {
-				log.Fatal(err)
-				return
-			}
+	// 		// If there was an error, do not continue.
+	// 		if err := secureMiddleware.Process(c.Writer, c.Request); err != nil {
+	// 			log.Fatal(err)
+	// 			return
+	// 		}
 
-			c.Next()
-		}
-	}()
+	// 		c.Next()
+	// 	}
+	// }()
 
 	// Set the initial API instance
 	r := gin.Default()
