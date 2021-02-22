@@ -46,7 +46,13 @@ func main() {
 	}
 
 	secureMiddleware := secure.New(secure.Options{
-		FrameDeny: true,
+		AllowedHosts:          []string{"api.bityield.finance"},
+		ContentTypeNosniff:    true,
+		ContentSecurityPolicy: "default-src 'self'",
+		ReferrerPolicy:        "same-origin",
+		FrameDeny:             true,
+		SSLHost:               "api.bityield.finance",
+		SSLRedirect:           true,
 	})
 
 	secureFunc := func() gin.HandlerFunc {
