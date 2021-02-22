@@ -7,7 +7,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/bityield/bityield-api/controllers"
 	"github.com/bityield/bityield-api/infra/database"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -54,10 +53,6 @@ func main() {
 	// Use Middleware to pass around the db connection
 	r.Use(gin.Logger())
 	r.Use(DatabaseMiddleware(db))
-	// r.Use(secureFunc)
-
-	// Heroku function
-	r.GET("/repeat", repeatHandler(repeat))
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
@@ -65,11 +60,14 @@ func main() {
 
 	r.StaticFile("/v1/kovan/indexes", "./assets/kovan/index.json")
 
-	r.GET("/funds", controllers.FindFunds)
-	r.GET("/funds/:id", controllers.FindFund)
+	// Heroku function
+	r.GET("/repeat", repeatHandler(repeat))
 
-	r.POST("/funds", controllers.CreateFund)
-	r.PATCH("/funds/:id", controllers.UpdateFund)
+	// r.GET("/funds", controllers.FindFunds)
+	// r.GET("/funds/:id", controllers.FindFund)
+
+	// r.POST("/funds", controllers.CreateFund)
+	// r.PATCH("/funds/:id", controllers.UpdateFund)
 
 	r.Run((":" + port))
 }
