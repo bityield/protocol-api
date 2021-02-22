@@ -75,14 +75,18 @@ func main() {
 
 	// Use Middleware to pass around the db connection
 	r.Use(gin.Logger())
-	r.Use(secureFunc)
 	r.Use(DatabaseMiddleware(db))
+	r.Use(secureFunc)
 
 	// Heroku function
 	r.GET("/repeat", repeatHandler(repeat))
 
+	// r.GET("/", func(c *gin.Context) {
+	// 	c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
+	// })
+
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
+		c.String(200, "X-Frame-Options header is now `DENY`.")
 	})
 
 	r.GET("/funds", controllers.FindFunds)
