@@ -44,22 +44,6 @@ func main() {
 		repeat = 5
 	}
 
-	// secureFunc := func() gin.HandlerFunc {
-	// 	return func(c *gin.Context) {
-	// 		secureMiddleware := secure.New(secure.Options{
-	// 			SSLRedirect: true,
-	// 		})
-
-	// 		// If there was an error, do not continue.
-	// 		if err := secureMiddleware.Process(c.Writer, c.Request); err != nil {
-	// 			log.Fatal(err)
-	// 			return
-	// 		}
-
-	// 		c.Next()
-	// 	}
-	// }()
-
 	// Set the initial API instance
 	r := gin.Default()
 
@@ -75,13 +59,11 @@ func main() {
 	// Heroku function
 	r.GET("/repeat", repeatHandler(repeat))
 
-	// r.GET("/", func(c *gin.Context) {
-	// 	c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
-	// })
-
 	r.GET("/", func(c *gin.Context) {
-		c.String(200, "X-Frame-Options header is now `DENY`.")
+		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
 	})
+
+	r.StaticFile("/v1/kovan/indexes", "./assets/kovan/index.json")
 
 	r.GET("/funds", controllers.FindFunds)
 	r.GET("/funds/:id", controllers.FindFund)
