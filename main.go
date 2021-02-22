@@ -71,7 +71,7 @@ func main() {
 	// Use Middleware to pass around the db connection
 	r.Use(gin.Logger())
 	r.Use(DatabaseMiddleware(db))
-	r.Use(secureFunc)
+	// r.Use(secureFunc)
 
 	// Heroku function
 	r.GET("/repeat", repeatHandler(repeat))
