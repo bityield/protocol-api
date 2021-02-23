@@ -68,6 +68,9 @@
           {
             "symbol": "USDC",
             "name": "The Centre Consortium",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x0000000000000000000000000000000000000000",
             "initialAllocationMantissa": "0.1",
             "initialAllocationGwei": "100000000000000000",
             "liquidityPair": "0x482dC9bB08111CB875109B075A40881E48aE02Cd"
@@ -75,6 +78,9 @@
           {
             "symbol": "WBTC",
             "name": "Wrapped BTC",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x0000000000000000000000000000000000000000",
             "initialAllocationMantissa": "0.05",
             "initialAllocationGwei": "50000000000000000",
             "liquidityPair": "0x3BDb41FcA3956A72cd841696bD59ca860F3f0513"
@@ -82,6 +88,9 @@
           {
             "symbol": "WETH",
             "name": "Wrapped ETH",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x0000000000000000000000000000000000000000",
             "initialAllocationMantissa": "0.05",
             "initialAllocationGwei": "50000000000000000",
             "liquidityPair": "0xd0A1E359811322d97991E03f863a0C30C2cF029C"
