@@ -58,7 +58,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
 	})
 
-	r.StaticFile("/v1/kovan/indexes", "./assets/kovan/index.json")
+	r.StaticFile("/v1/tokens/kovan", "./assets/tokens/kovan/index.json")
 
 	// Heroku function
 	r.GET("/repeat", repeatHandler(repeat))
