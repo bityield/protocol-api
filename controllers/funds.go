@@ -1,12 +1,10 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 
 	"github.com/bityield/bityield-api/infra/database/models"
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
 )
 
 // var (
@@ -27,18 +25,9 @@ type UpdateFundInput struct {
 	Name string `json:"name" binding:"required"`
 }
 
-func getConn(c *gin.Context) (*gorm.DB, error) {
-	db, err := c.Keys["conn"].(*gorm.DB)
-	if !err {
-		return nil, errors.New("could not get 'conn' context connection from gin.Context")
-	}
-
-	return db, nil
-}
-
 // FindFunds returns all funds
 func FindFunds(c *gin.Context) {
-	db, err := getConn(c)
+	db, err := GetConn(c)
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +40,7 @@ func FindFunds(c *gin.Context) {
 
 // CreateFund post creation
 func CreateFund(c *gin.Context) {
-	db, err := getConn(c)
+	db, err := GetConn(c)
 	if err != nil {
 		panic(err)
 	}
@@ -70,7 +59,7 @@ func CreateFund(c *gin.Context) {
 
 // FindFund returns a sinlg fund by Id
 func FindFund(c *gin.Context) {
-	db, err := getConn(c)
+	db, err := GetConn(c)
 	if err != nil {
 		panic(err)
 	}
@@ -87,7 +76,7 @@ func FindFund(c *gin.Context) {
 
 // UpdateFund ...
 func UpdateFund(c *gin.Context) {
-	db, err := getConn(c)
+	db, err := GetConn(c)
 	if err != nil {
 		panic(err)
 	}

@@ -11,9 +11,15 @@ import (
 // Fund schema
 type Fund struct {
 	ID        uint32    `gorm:"primary_key;auto_increment" json:"id"`
-	Name      string    `gorm:"size:255;not null;unique" json:"nickname"`
+	Name      string    `gorm:"size:255;not null;unique" json:"name"`
+	Slug      string    `gorm:"size:255;not null;unique" json:"slug"`
+	Address   string    `gorm:"size:255;not null;" json:"address"`
+	Network   string    `gorm:"size:255;not null;" json:"network"`
 	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
+
+	// Associations
+	Assets []Asset
 }
 
 // Prepare sets default attributes on model

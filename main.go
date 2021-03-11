@@ -5,10 +5,11 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 
+	v1 "github.com/bityield/bityield-api/controllers/v1"
 	"github.com/bityield/bityield-api/infra/database"
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/gorm"
 )
 
@@ -16,6 +17,14 @@ import (
 func DatabaseMiddleware(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set("conn", db)
+		c.Next()
+	}
+}
+
+// RedisMiddleware for gin to pass DB context around
+func RedisMiddleware(db *redis.Client) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set("redis", db)
 		c.Next()
 	}
 }
@@ -37,21 +46,19 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	repeat, err := strconv.Atoi(os.Getenv("REPEAT"))
-	if err != nil {
-		log.Printf("Error converting $REPEAT to an int: %q - Using default\n", err)
-		repeat = 5
-	}
-
 	// Set the initial API instance
 	r := gin.Default()
+
+	// Use Middleware to pass around the db connection
+	r.Use(gin.Logger())
+
+	// Redis connection
+	rd := database.ConnectRedis("localhost:6379")
+	r.Use(RedisMiddleware(rd))
 
 	// Database connection
 	db := database.ConnectDatabase()
 	defer db.Close()
-
-	// Use Middleware to pass around the db connection
-	r.Use(gin.Logger())
 	r.Use(DatabaseMiddleware(db))
 
 	r.GET("/", func(c *gin.Context) {
@@ -59,9 +66,13 @@ func main() {
 	})
 
 	r.StaticFile("/v1/indexes/kovan", "./assets/indexes/kovan/index.json")
+	r.StaticFile("/v1/indexes/ropsten", "./assets/indexes/ropsten/index.json")
 
 	// Heroku function
-	r.GET("/repeat", repeatHandler(repeat))
+	r.GET("/repeat", repeatHandler(5))
+
+	// API Methods and endpoints
+	r.GET("/v1/historicals/:symbol", v1.GetHistoricals)
 
 	// r.GET("/funds", controllers.FindFunds)
 	// r.GET("/funds/:id", controllers.FindFund)

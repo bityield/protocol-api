@@ -1,0 +1,161 @@
+{
+    "Administrator": "Bityield Finance, Inc",
+    "Description": "Bityield.finance - operated index funds | https://bityield.finance",
+    "Operators": {
+      "admin": "0x0000000000000000000000000000000000000000",
+      "dispatcher": "0x0000000000000000000000000000000000000000",
+      "deployer": "0x0000000000000000000000000000000000000000",
+      "comptroller": "0x0000000000000000000000000000000000000000",
+      "supervisor": "0x0000000000000000000000000000000000000000",
+      "custodian": "0x0000000000000000000000000000000000000000"
+    },
+    "Network": "ropsten",
+    "Indexes":[
+      {
+        "Name": "Standard Utility / Yield GP1",
+        "Slug": "standard-utility-yield-gp1",
+        "Symbol": "SUYGP1",
+        "Address": "0x0000000000000000000000000000000000000000",
+        "Description": "Weighted over large cap market movers and utilities",
+        "CreatedAt": "2021-2-22",
+        "Status": "active",
+        "Version": "0x01",
+        "Events": [
+          {
+            "action": "creation",
+            "timestamp": 1614026660,
+            "version": "0x01"
+          }
+        ],
+        "Assets": [
+          {
+            "symbol": "WBTC",
+            "name": "Wrapped BTC",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0xe39e6637395AC1d0d01c12e846E43fbDD01249fB",
+            "initialAllocationMantissa": "0.3",
+            "initialAllocationGwei": "300000000000000000"
+          },
+          {
+            "symbol": "WETH",
+            "name": "Wrapped ETH",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x3949d09628eA7a714Ea3C34cA8A520EdACf3825D",
+            "initialAllocationMantissa": "0.3",
+            "initialAllocationGwei": "300000000000000000"
+          },
+          {
+            "symbol": "USDC",
+            "name": "The Centre Consortium",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x91f61442E3A714782E8931Da0fefe620A30b2D21",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "60000000000000000"
+          },
+          {
+            "symbol": "COMP",
+            "name": "Compound",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0xc102eF924Ea10E6cD8D2AA775b5Cd0dAb01CDB47",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000"
+          },
+          {
+            "symbol": "UNI",
+            "name": "Uniswap",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x339A8c5Fd0D82CbeFA8fBfb4333Cb5540177F672",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000"
+          },
+          {
+            "symbol": "BAT",
+            "name": "Basic Attention Token",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x2e3443a910DC27891365994f8D50bcad04B2F768",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "60000000000000000"
+          }
+        ]
+      },
+      {
+        "Name": "Market Movers GP1",
+        "Slug": "market-movers-gp1",
+        "Symbol": "MMGP1",
+        "Address": "0x0000000000000000000000000000000000000000",
+        "Description": "Weighted over large cap market movers.",
+        "CreatedAt": "2021-2-22",
+        "Status": "active",
+        "Version": "0x01",
+        "Events": [
+          {
+            "action": "creation",
+            "timestamp": 1614026660,
+            "version": "0x01"
+          }
+        ],
+        "Assets": [
+          {
+            "symbol": "WBTC",
+            "name": "Wrapped BTC",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0xe39e6637395AC1d0d01c12e846E43fbDD01249fB",
+            "initialAllocationMantissa": "0.3",
+            "initialAllocationGwei": "300000000000000000"
+          },
+          {
+            "symbol": "WETH",
+            "name": "Wrapped ETH",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x3949d09628eA7a714Ea3C34cA8A520EdACf3825D",
+            "initialAllocationMantissa": "0.3",
+            "initialAllocationGwei": "300000000000000000"
+          },
+          {
+            "symbol": "COMP",
+            "name": "Compound",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0xc102eF924Ea10E6cD8D2AA775b5Cd0dAb01CDB47",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000"
+          },
+          {
+            "symbol": "LINK",
+            "name": "Chainlink",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0xb1A69e1A38417fAaA91CA4859a2e2D5Ab3d34960",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000"
+          },
+          {
+            "symbol": "UNI",
+            "name": "Uniswap",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0x339A8c5Fd0D82CbeFA8fBfb4333Cb5540177F672",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000"
+          },
+          {
+            "symbol": "AAVE",
+            "name": "Aave",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000"
+          }
+        ]
+      }
+    ]
+  }

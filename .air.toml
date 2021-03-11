@@ -4,7 +4,7 @@ tmp_dir = "tmp"
 [build]
 cmd = "go build -o bin/api main.go"
 bin = "bin/api"
-# full_bin = "PORT=3000 bin/api"
+full_bin = "PORT=8000 bin/api"
 
 # Watch these filename extensions.
 include_ext = ["go", "tpl", "tmpl", "html"]

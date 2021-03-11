@@ -12,6 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// User ...
 type User struct {
 	ID        uint32    `gorm:"primary_key;auto_increment" json:"id"`
 	Username  string    `gorm:"size:255;not null;unique" json:"username"`
@@ -21,14 +22,17 @@ type User struct {
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
+// Hash ...
 func Hash(password string) ([]byte, error) {
 	return bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 }
 
+// VerifyPassword ...
 func VerifyPassword(hashedPassword, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
+// BeforeSave ...
 func (u *User) BeforeSave() error {
 	hashedPassword, err := Hash(u.Password)
 	if err != nil {
@@ -38,6 +42,7 @@ func (u *User) BeforeSave() error {
 	return nil
 }
 
+// Prepare ...
 func (u *User) Prepare() {
 	u.ID = 0
 	u.Username = html.EscapeString(strings.TrimSpace(u.Username))
@@ -46,6 +51,7 @@ func (u *User) Prepare() {
 	u.UpdatedAt = time.Now()
 }
 
+// Validate ...
 func (u *User) Validate(action string) error {
 	switch strings.ToLower(action) {
 	case "update":
@@ -92,6 +98,7 @@ func (u *User) Validate(action string) error {
 	}
 }
 
+// SaveUser ...
 func (u *User) SaveUser(db *gorm.DB) (*User, error) {
 
 	var err error
@@ -102,6 +109,7 @@ func (u *User) SaveUser(db *gorm.DB) (*User, error) {
 	return u, nil
 }
 
+// FindAllUsers ...
 func (u *User) FindAllUsers(db *gorm.DB) (*[]User, error) {
 	var err error
 	users := []User{}
@@ -112,6 +120,7 @@ func (u *User) FindAllUsers(db *gorm.DB) (*[]User, error) {
 	return &users, err
 }
 
+// FindUserByID ...
 func (u *User) FindUserByID(db *gorm.DB, uid uint32) (*User, error) {
 	var err error
 	err = db.Debug().Model(User{}).Where("id = ?", uid).Take(&u).Error
@@ -124,6 +133,7 @@ func (u *User) FindUserByID(db *gorm.DB, uid uint32) (*User, error) {
 	return u, err
 }
 
+// UpdateAUser ...
 func (u *User) UpdateAUser(db *gorm.DB, uid uint32) (*User, error) {
 
 	// To hash the password
@@ -150,6 +160,7 @@ func (u *User) UpdateAUser(db *gorm.DB, uid uint32) (*User, error) {
 	return u, nil
 }
 
+// DeleteAUser ...
 func (u *User) DeleteAUser(db *gorm.DB, uid uint32) (int64, error) {
 
 	db = db.Debug().Model(&User{}).Where("id = ?", uid).Take(&User{}).Delete(&User{})

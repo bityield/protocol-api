@@ -6,13 +6,16 @@
       "dispatcher": "0x0000000000000000000000000000000000000000",
       "deployer": "0x0000000000000000000000000000000000000000",
       "comptroller": "0x0000000000000000000000000000000000000000",
-      "supervisor": "0x0000000000000000000000000000000000000000"
+      "supervisor": "0x0000000000000000000000000000000000000000",
+      "custodian": "0x0000000000000000000000000000000000000000"
     },
     "Network": "kovan",
     "Indexes":[
       {
         "Name": "GeneralPurposeV1",
+        "Slug": "general-purpose-v1",
         "Symbol": "BYGP1",
+        "Address": "0x0000000000000000000000000000000000000000",
         "Description": "High Yield index",
         "CreatedAt": "2021-2-22",
         "Status": "active",
