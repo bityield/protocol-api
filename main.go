@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"log"
 	"net/http"
 	"os"
 
@@ -43,7 +42,7 @@ func repeatHandler(r int) gin.HandlerFunc {
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		port = "8000"
 	}
 
 	// Set the initial API instance
