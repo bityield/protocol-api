@@ -7,14 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// var (
-// 	db *gorm.DB
-// )
-
-// func init() {
-// 	db = database.ConnectDataBase()
-// }
-
 // CreateFundInput validator for POST
 type CreateFundInput struct {
 	Name string `json:"name" binding:"required"`

@@ -12,8 +12,8 @@
     "Network": "ropsten",
     "Indexes":[
       {
-        "Name": "Standard Utility / Yield GP1",
-        "Slug": "standard-utility-yield-gp1",
+        "Name": "Basic Utility",
+        "Slug": "basic-utility",
         "Symbol": "SUYGP1",
         "Address": "0x0000000000000000000000000000000000000000",
         "Description": "Weighted over large cap market movers and utilities",
@@ -85,9 +85,9 @@
         ]
       },
       {
-        "Name": "Market Movers GP1",
-        "Slug": "market-movers-gp1",
-        "Symbol": "MMGP1",
+        "Name": "Market Movers",
+        "Slug": "market-movers",
+        "Symbol": "BYMM",
         "Address": "0x0000000000000000000000000000000000000000",
         "Description": "Weighted over large cap market movers.",
         "CreatedAt": "2021-2-22",

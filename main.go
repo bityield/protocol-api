@@ -57,9 +57,9 @@ func main() {
 	r.Use(RedisMiddleware(rd))
 
 	// Database connection
-	db := database.ConnectDatabase()
-	defer db.Close()
-	r.Use(DatabaseMiddleware(db))
+	// db := database.ConnectDatabase()
+	// defer db.Close()
+	// r.Use(DatabaseMiddleware(db))
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
