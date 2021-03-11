@@ -13,10 +13,6 @@ import (
 
 var ctx = context.Background()
 
-// func calculateInterval(interval string) []int {
-
-// }
-
 // GetHistoricals ...
 func GetHistoricals(c *gin.Context) {
 	db, err := controllers.GetRedis(c)

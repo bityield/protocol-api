@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/bityield/bityield-api/controllers"
 	v1 "github.com/bityield/bityield-api/controllers/v1"
 	"github.com/bityield/bityield-api/infra/database"
 	"github.com/gin-gonic/gin"
@@ -67,8 +68,8 @@ func main() {
 	r.StaticFile("/v1/indexes/kovan", "./assets/indexes/kovan/index.json")
 	r.StaticFile("/v1/indexes/ropsten", "./assets/indexes/ropsten/index.json")
 
-	// Heroku function
 	r.GET("/repeat", repeatHandler(5))
+	r.GET("/ping", controllers.Ping)
 
 	// API Methods and endpoints
 	r.GET("/v1/historicals/:symbol", v1.GetHistoricals)
