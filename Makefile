@@ -1,4 +1,5 @@
 IMAGE=svc-bityield-api:latest
+DC=docker-compose
 
 build:
 	@echo "building [api]..."
@@ -21,3 +22,14 @@ up:
 
 watch:
 	@PORT=8000 air
+
+docker:
+	$(DC) -f $(DC).yml up --build
+
+down:
+	-docker stop protocol-api_protocol-api_1
+	-docker rm protocol-api_protocol-api_1
+	-docker stop protocol-api_postgres_1
+	-docker rm protocol-api_postgres_1
+	-docker stop protocol-api_redis_1
+	-docker rm protocol-api_redis_1

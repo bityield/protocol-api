@@ -31,12 +31,18 @@ func ConnectRedis(address string) *redis.Client {
 
 // ConnectDatabase kind of explanatory
 func ConnectDatabase() *gorm.DB {
-	var dbURL string
+	// var dbURL string
 
-	dbURL = os.Getenv("DATABASE_URL")
-	if dbURL == "" {
-		dbURL = "host=localhost port=5432 user=postgres dbname=bityield-api sslmode=disable password="
-	}
+	host := os.Getenv("POSTGRES_HOST")
+	user := os.Getenv("POSTGRES_USER")
+	pass := os.Getenv("POSTGRES_PASSWORD")
+	dbname := os.Getenv("POSTGRES_DB")
+	port := os.Getenv("POSTGRES_PORT")
+	dbURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, dbname, pass)
+	// dbURL = os.Getenv("DATABASE_URL")
+	// if dbURL == "" {
+	// 	dbURL = "host=localhost port=5432 user=postgres dbname=bityield-api sslmode=disable password="
+	// }
 
 	db, err := gorm.Open("postgres", dbURL)
 	if err != nil {

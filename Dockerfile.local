@@ -1,0 +1,21 @@
+# Lock 1.15.10-alpine
+FROM golang:1.15-alpine
+
+ADD . /go/src/github.com/bityield/protocol-api
+
+WORKDIR /go/src/github.com/bityield/protocol-api
+
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+
+RUN go get -u ./... && \
+    #go get github.com/cosmtrek/air && \
+    go get github.com/cosmtrek/air@b538c70423fb3590435c003dda15bf6a2f61187c && \
+    go mod download && \
+    go mod tidy && \
+    go mod vendor
+
+RUN go build -o bin/api main.go
+
+ENTRYPOINT air
+# ENTRYPOINT /go/src/github.com/bityield/protocol-api/bin/api
