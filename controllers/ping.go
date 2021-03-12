@@ -16,12 +16,9 @@ func Ping(c *gin.Context) {
 		panic(err)
 	}
 
-	val, err := db.Get(ctx, "ping").Result()
-	if err != nil {
-		panic(err)
-	}
+	db.Set(ctx, "ping", "pong", 0)
 
 	c.JSON(http.StatusOK, gin.H{
-		"ping": val,
+		"ping": db.Get(ctx, "ping").Val(),
 	})
 }
