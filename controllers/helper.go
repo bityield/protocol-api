@@ -2,18 +2,14 @@ package controllers
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
 
-// GetConn ...
-func GetConn(c *gin.Context) (*gorm.DB, error) {
-	fmt.Println("----------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-	fmt.Println(c.Keys)
-
+// GetDatabase ...
+func GetDatabase(c *gin.Context) (*gorm.DB, error) {
 	db, err := c.Keys["database"].(*gorm.DB)
 	if !err {
 		return nil, errors.New("could not get 'database' context connection from gin.Context")

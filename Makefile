@@ -1,5 +1,5 @@
 DC=docker-compose
-IG=svc-bityield-api:latest
+IG=svc-protocol-api:latest
 
 .PHONY: all build compose-down compose-up deps run watch
 

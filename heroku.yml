@@ -3,4 +3,4 @@ build:
     - go
 
 run:
-  web: bityield-api
+  web: protocol-api

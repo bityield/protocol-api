@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/bityield/bityield-api/controllers"
+	"github.com/bityield/protocol-api/controllers"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 )

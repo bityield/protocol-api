@@ -1,1 +1,1 @@
-web: bin/bityield-api
+web: bin/protocol-api

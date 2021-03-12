@@ -7,5 +7,5 @@
     ],
     "install" : [ "./..." ],
     "website": "https://bityield.finance",
-    "repository": "http://github.com/bityield/bityield-api"
+    "repository": "http://github.com/bityield/protocol-api"
   }

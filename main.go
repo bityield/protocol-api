@@ -3,9 +3,9 @@ package main
 import (
 	"net/http"
 
-	"github.com/bityield/bityield-api/backend"
-	"github.com/bityield/bityield-api/controllers"
-	v1 "github.com/bityield/bityield-api/controllers/v1"
+	"github.com/bityield/protocol-api/backend"
+	"github.com/bityield/protocol-api/controllers"
+	v1 "github.com/bityield/protocol-api/controllers/v1"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/gorm"

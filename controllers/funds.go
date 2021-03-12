@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/bityield/bityield-api/infra/database/models"
+	"github.com/bityield/protocol-api/infra/database/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +19,7 @@ type UpdateFundInput struct {
 
 // FindFunds returns all funds
 func FindFunds(c *gin.Context) {
-	db, err := GetConn(c)
+	db, err := GetDatabase(c)
 	if err != nil {
 		panic(err)
 	}
@@ -32,7 +32,7 @@ func FindFunds(c *gin.Context) {
 
 // CreateFund post creation
 func CreateFund(c *gin.Context) {
-	db, err := GetConn(c)
+	db, err := GetDatabase(c)
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +51,7 @@ func CreateFund(c *gin.Context) {
 
 // FindFund returns a sinlg fund by Id
 func FindFund(c *gin.Context) {
-	db, err := GetConn(c)
+	db, err := GetDatabase(c)
 	if err != nil {
 		panic(err)
 	}
@@ -68,7 +68,7 @@ func FindFund(c *gin.Context) {
 
 // UpdateFund ...
 func UpdateFund(c *gin.Context) {
-	db, err := GetConn(c)
+	db, err := GetDatabase(c)
 	if err != nil {
 		panic(err)
 	}

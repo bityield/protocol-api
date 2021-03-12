@@ -11,7 +11,7 @@ import (
 
 const (
 	// Name for the applicaiton
-	Name = "bityield-api"
+	Name = "protocol-api"
 
 	// Env getter for Viper
 	Env = "env"

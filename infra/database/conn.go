@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/bityield/bityield-api/infra/database/models"
+	"github.com/bityield/protocol-api/infra/database/models"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )

@@ -4,12 +4,12 @@ import (
 
 	// "strconv"
 
-	"github.com/bityield/bityield-api/config"
+	"github.com/bityield/protocol-api/config"
 	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/gorm"
 
-	db "github.com/bityield/bityield-api/infra/database"
-	rd "github.com/bityield/bityield-api/infra/redis"
+	db "github.com/bityield/protocol-api/infra/database"
+	rd "github.com/bityield/protocol-api/infra/redis"
 
 	"github.com/sirupsen/logrus"
 )

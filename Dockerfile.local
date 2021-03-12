@@ -21,7 +21,6 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 #     go mod tidy && \
 #     go mod vendor
 
-RUN go build -o bin/api main.go
+# RUN go build -o bin/api main.go
 
 ENTRYPOINT air
-# ENTRYPOINT /go/src/github.com/bityield/protocol-api/bin/api
