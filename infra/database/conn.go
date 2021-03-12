@@ -9,40 +9,21 @@ import (
 	"os"
 
 	"github.com/bityield/bityield-api/infra/database/models"
-	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-// ConnectRedis ...
-func ConnectRedis(address string) *redis.Client {
-	client := redis.NewClient(&redis.Options{
-		Addr:     address,
-		Password: "",
-		DB:       0,
-	})
+var ctx = context.Background()
 
-	if err := client.Ping(context.Background()).Err(); err != nil {
-		panic(err)
-	}
-
-	return client
-}
-
-// ConnectDatabase kind of explanatory
-func ConnectDatabase() *gorm.DB {
-	// var dbURL string
-
+// Connect kind of explanatory
+func Connect() *gorm.DB {
 	host := os.Getenv("POSTGRES_HOST")
 	user := os.Getenv("POSTGRES_USER")
 	pass := os.Getenv("POSTGRES_PASSWORD")
 	dbname := os.Getenv("POSTGRES_DB")
 	port := os.Getenv("POSTGRES_PORT")
+
 	dbURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, dbname, pass)
-	// dbURL = os.Getenv("DATABASE_URL")
-	// if dbURL == "" {
-	// 	dbURL = "host=localhost port=5432 user=postgres dbname=bityield-api sslmode=disable password="
-	// }
 
 	db, err := gorm.Open("postgres", dbURL)
 	if err != nil {

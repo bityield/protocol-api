@@ -1,22 +1,21 @@
 package main
 
 import (
-	"bytes"
 	"net/http"
-	"os"
 
+	"github.com/bityield/bityield-api/backend"
 	"github.com/bityield/bityield-api/controllers"
 	v1 "github.com/bityield/bityield-api/controllers/v1"
-	"github.com/bityield/bityield-api/infra/database"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/gorm"
+	ginlogrus "github.com/toorop/gin-logrus"
 )
 
 // DatabaseMiddleware for gin to pass DB context around
 func DatabaseMiddleware(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Set("conn", db)
+		c.Set("database", db)
 		c.Next()
 	}
 }
@@ -29,56 +28,45 @@ func RedisMiddleware(db *redis.Client) gin.HandlerFunc {
 	}
 }
 
-// repeatHandler for Heroku
-func repeatHandler(r int) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		var buffer bytes.Buffer
-		for i := 0; i < r; i++ {
-			buffer.WriteString("Hello from Go!\n")
-		}
-		c.String(http.StatusOK, buffer.String())
-	}
-}
-
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
+	// Initalize a new client, the base entrpy point to the application code
+	b, e := backend.NewBackend()
+	if e != nil {
+		panic(e)
 	}
+
+	// Database connect, defer close
+	defer b.R.D.Close()
 
 	// Set the initial API instance
 	r := gin.Default()
 
 	// Use Middleware to pass around the db connection
-	r.Use(gin.Logger())
-
-	// Redis connection
-	rd := database.ConnectRedis(os.Getenv("REDIS"))
-	r.Use(RedisMiddleware(rd))
-
-	// Database connection
-	db := database.ConnectDatabase()
-	defer db.Close()
-	r.Use(DatabaseMiddleware(db))
+	r.Use(ginlogrus.Logger(b.L), gin.Recovery())
+	r.Use(DatabaseMiddleware(b.R.D))
+	r.Use(RedisMiddleware(b.R.R))
 
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})
+		c.JSON(http.StatusOK, gin.H{
+			"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API.",
+		})
+	})
+
+	r.GET("/health", func(c *gin.Context) {
+		c.Data(200, "text/plain", []byte("OK"))
 	})
 
 	r.StaticFile("/v1/indexes/kovan", "./assets/indexes/kovan/index.json")
 	r.StaticFile("/v1/indexes/ropsten", "./assets/indexes/ropsten/index.json")
 
-	r.GET("/repeat", repeatHandler(5))
 	r.GET("/ping", controllers.Ping)
 
 	// API Methods and endpoints
 	r.GET("/v1/historicals/:symbol", v1.GetHistoricals)
 
-	// r.GET("/funds", controllers.FindFunds)
-	// r.GET("/funds/:id", controllers.FindFund)
+	// Funds endpoints
+	r.GET("/funds", controllers.FindFunds)
+	r.GET("/funds/:id", controllers.FindFund)
 
-	// r.POST("/funds", controllers.CreateFund)
-	// r.PATCH("/funds/:id", controllers.UpdateFund)
-
-	r.Run((":" + port))
+	r.Run((":" + b.C.GetString("port")))
 }

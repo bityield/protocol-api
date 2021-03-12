@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
@@ -10,9 +11,12 @@ import (
 
 // GetConn ...
 func GetConn(c *gin.Context) (*gorm.DB, error) {
-	db, err := c.Keys["conn"].(*gorm.DB)
+	fmt.Println("----------------------------------$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(c.Keys)
+
+	db, err := c.Keys["database"].(*gorm.DB)
 	if !err {
-		return nil, errors.New("could not get 'conn' context connection from gin.Context")
+		return nil, errors.New("could not get 'database' context connection from gin.Context")
 	}
 
 	return db, nil
