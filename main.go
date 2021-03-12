@@ -53,13 +53,13 @@ func main() {
 	r.Use(gin.Logger())
 
 	// Redis connection
-	rd := database.ConnectRedis("localhost:6379")
+	rd := database.ConnectRedis(os.Getenv("REDIS"))
 	r.Use(RedisMiddleware(rd))
 
 	// Database connection
-	// db := database.ConnectDatabase()
-	// defer db.Close()
-	// r.Use(DatabaseMiddleware(db))
+	db := database.ConnectDatabase()
+	defer db.Close()
+	r.Use(DatabaseMiddleware(db))
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"bityield": "Welcome to the Bityield API. Visit https://bityield.finance/developers/api for details about this API."})

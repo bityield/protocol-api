@@ -1,0 +1,47 @@
+  
+version: "3.2"
+
+services:
+
+  protocol-api:
+    build:
+      dockerfile: Dockerfile.local
+      context: .
+    # Disable logging for easier debugging
+    # logging:
+    #   driver: none
+    environment:
+      - REDIS=redis:6379
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - API_PORT=8000
+    volumes: 
+      - ./:/go/src/github.com/bityield/protocol-api
+    working_dir: /go/src/github.com/bityield/protocol-api
+    command: air
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - '8000:8000'
+    restart: always
+
+  postgres:
+    image: 'postgres:latest'
+    # logging:
+    #   driver: none
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - '5432:5432'
+    restart: always
+
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6379:6379'

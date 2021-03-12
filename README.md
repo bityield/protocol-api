@@ -2,13 +2,17 @@
 
 ## Dependencies
 
-- Postgres
-- Redis
+- Go https://dl.google.com/go/go1.15.6.darwin-amd64.pkg
+- Docker
 
 Someone please setup a proper docker-compose
 
 ## Getting started
 
 ```
-make deps build watch
+$ make docker
+```
+
+```
+$ make deps build watch
 ```
