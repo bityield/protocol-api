@@ -1,7 +1,17 @@
 DC=docker-compose
 IG=svc-protocol-api:latest
 
-.PHONY: all build compose-down compose-up deps run watch
+GO_SRC_DIRS := $(shell \
+	find . -name "*.go" -not -path "./vendor/*" | \
+	xargs -I {} dirname {}  | \
+	uniq)
+
+GO_TEST_DIRS := $(shell \
+	find . -name "*_test.go" -not -path "./vendor/*" | \
+	xargs -I {} dirname {}  | \
+	uniq)
+
+.PHONY: all build compose-down compose-up deps run test watch
 
 all: build
 
@@ -33,8 +43,14 @@ deps:
 	@go mod tidy
 	@go mod vendor
 
+lint:
+	@golint ./...
+
 run:
 	@PORT=8000 ./bin/api
+
+test:
+	@go test -v ./...
 
 watch:
 	@air
