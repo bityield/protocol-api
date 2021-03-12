@@ -3,6 +3,8 @@ node_modules
 package-lock.json
 .vscode
 log
+vendor/
+tmp/
 
 # Applications
 bin/api
