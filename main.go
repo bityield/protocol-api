@@ -60,7 +60,13 @@ func main() {
 	r := gin.Default()
 
 	// Enable and/or set cors
-	r.Use(cors.Default())
+	cf := cors.DefaultConfig()
+	cf.AllowAllOrigins = true
+	cf.AllowCredentials = true
+	cf.AddAllowHeaders("authorization")
+	r.Use(cors.New(cf))
+
+	// r.Use(cors.Default())
 	r.Use(CORSMiddleware())
 
 	// Use Middleware to pass around the db connection
