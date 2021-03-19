@@ -29,6 +29,23 @@ func RedisMiddleware(db *redis.Client) gin.HandlerFunc {
 	}
 }
 
+// CORSMiddleware ...
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
+}
+
 func main() {
 	// Initalize a new client, the base entrpy point to the application code
 	b, e := backend.NewBackend(false, true)
@@ -44,6 +61,7 @@ func main() {
 
 	// Enable and/or set cors
 	r.Use(cors.Default())
+	r.Use(CORSMiddleware())
 
 	// Use Middleware to pass around the db connection
 	r.Use(ginlogrus.Logger(b.L), gin.Recovery())
