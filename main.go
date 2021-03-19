@@ -31,7 +31,7 @@ func RedisMiddleware(db *redis.Client) gin.HandlerFunc {
 
 func main() {
 	// Initalize a new client, the base entrpy point to the application code
-	b, e := backend.NewBackend()
+	b, e := backend.NewBackend(false, true)
 	if e != nil {
 		panic(e)
 	}

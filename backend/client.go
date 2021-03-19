@@ -33,25 +33,32 @@ type Backend struct {
 }
 
 // NewBackend - factory method for producing a new type of Backend
-func NewBackend() (*Backend, error) {
+func NewBackend(cDB bool, cRD bool) (*Backend, error) {
 	c, err := config.LoadConfig(config.Defaults)
 	if err != nil {
 		return nil, err
 	}
 
-	// Database connection
-	ds := db.Connect()
+	var dss *gorm.DB
+	var rdd *redis.Client
 
-	// Redis connection
-	rd := rd.Connect()
+	if cDB {
+		// Database connection
+		dss = db.Connect()
+	}
+
+	if cRD {
+		// Redis connection
+		rdd = rd.Connect()
+	}
 
 	// Base BackendConfiguration to link structs and objects
 	var bc = &Backend{
 		C: c,
 		L: config.LoadLogger(c),
 		R: &Repository{
-			D: ds,
-			R: rd,
+			D: dss,
+			R: rdd,
 		},
 	}
 
