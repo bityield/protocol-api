@@ -6,6 +6,7 @@ import (
 	"github.com/bityield/protocol-api/backend"
 	"github.com/bityield/protocol-api/controllers"
 	v1 "github.com/bityield/protocol-api/controllers/v1"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/gorm"
@@ -40,6 +41,9 @@ func main() {
 
 	// Set the initial API instance
 	r := gin.Default()
+
+	// Enable and/or set cors
+	r.Use(cors.Default())
 
 	// Use Middleware to pass around the db connection
 	r.Use(ginlogrus.Logger(b.L), gin.Recovery())
