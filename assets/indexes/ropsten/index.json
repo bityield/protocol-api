@@ -12,14 +12,14 @@
     "Network": "ropsten",
     "Indexes":[
       {
-        "Name": "Basic Utility",
-        "Slug": "basic-utility",
-        "Symbol": "SUYGP1",
+        "Name": "Bityield Market Movers Index",
+        "Symbol": "BYMMI",
         "Address": "0x0000000000000000000000000000000000000000",
-        "Description": "Weighted over large cap market movers and utilities",
+        "Description": "Weighted over large cap market movers.",
         "CreatedAt": "2021-2-22",
         "Status": "active",
         "Version": "0x01",
+        "Icon": "https://raw.githubusercontent.com/bityield/uniswap-token-list/master/assets/funds/stereoscope.svg",
         "Events": [
           {
             "action": "creation",
@@ -35,7 +35,8 @@
             "decimals": 18,
             "address": "0xe39e6637395AC1d0d01c12e846E43fbDD01249fB",
             "initialAllocationMantissa": "0.3",
-            "initialAllocationGwei": "300000000000000000"
+            "initialAllocationGwei": "300000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/wbtc.svg"
           },
           {
             "symbol": "WETH",
@@ -44,7 +45,8 @@
             "decimals": 18,
             "address": "0x3949d09628eA7a714Ea3C34cA8A520EdACf3825D",
             "initialAllocationMantissa": "0.3",
-            "initialAllocationGwei": "300000000000000000"
+            "initialAllocationGwei": "300000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/weth.svg"
           },
           {
             "symbol": "USDC",
@@ -53,7 +55,8 @@
             "decimals": 18,
             "address": "0x91f61442E3A714782E8931Da0fefe620A30b2D21",
             "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "60000000000000000"
+            "initialAllocationGwei": "100000000000000000",
+            "icon": "https://github.com/bityield/uniswap-token-list/raw/master/assets/usdc.svg"
           },
           {
             "symbol": "COMP",
@@ -62,7 +65,8 @@
             "decimals": 18,
             "address": "0xc102eF924Ea10E6cD8D2AA775b5Cd0dAb01CDB47",
             "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "100000000000000000"
+            "initialAllocationGwei": "100000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/comp.svg"
           },
           {
             "symbol": "UNI",
@@ -71,7 +75,8 @@
             "decimals": 18,
             "address": "0x339A8c5Fd0D82CbeFA8fBfb4333Cb5540177F672",
             "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "100000000000000000"
+            "initialAllocationGwei": "100000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/uni.svg"
           },
           {
             "symbol": "BAT",
@@ -80,19 +85,20 @@
             "decimals": 18,
             "address": "0x2e3443a910DC27891365994f8D50bcad04B2F768",
             "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "60000000000000000"
+            "initialAllocationGwei": "100000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/bat.svg"
           }
         ]
       },
       {
-        "Name": "Market Movers",
-        "Slug": "market-movers",
-        "Symbol": "BYMM",
+        "Name": "Bityield FAANG Index",
+        "Symbol": "BYFI",
         "Address": "0x0000000000000000000000000000000000000000",
-        "Description": "Weighted over large cap market movers.",
+        "Description": "Tracking US FAANG.",
         "CreatedAt": "2021-2-22",
         "Status": "active",
         "Version": "0x01",
+        "Icon": "https://raw.githubusercontent.com/bityield/uniswap-token-list/master/assets/funds/fang.svg",
         "Events": [
           {
             "action": "creation",
@@ -102,59 +108,55 @@
         ],
         "Assets": [
           {
-            "symbol": "WBTC",
-            "name": "Wrapped BTC",
+            "symbol": "MFB",
+            "name": "Wrapped Mirrored FB",
             "chainId": 1,
             "decimals": 18,
-            "address": "0xe39e6637395AC1d0d01c12e846E43fbDD01249fB",
-            "initialAllocationMantissa": "0.3",
-            "initialAllocationGwei": "300000000000000000"
+            "address": "0x0Add4875eBcbD2306921e12133feB562E1cc82b4",
+            "initialAllocationMantissa": "0.2",
+            "initialAllocationGwei": "200000000000000000",
+            "icon": "https://raw.githubusercontent.com/bityield/uniswap-token-list/master/assets/funds/facebook.svg"
           },
           {
-            "symbol": "WETH",
-            "name": "Wrapped ETH",
+            "symbol": "MAMZN",
+            "name": "Wrapped Mirrored AMZN",
             "chainId": 1,
             "decimals": 18,
-            "address": "0x3949d09628eA7a714Ea3C34cA8A520EdACf3825D",
-            "initialAllocationMantissa": "0.3",
-            "initialAllocationGwei": "300000000000000000"
+            "address": "0x3210bc26eb5427d0fc19de7ab272b3bb3e4bc4b0",
+            "initialAllocationMantissa": "0.2",
+            "initialAllocationGwei": "200000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mAMZN.svg"
           },
           {
-            "symbol": "COMP",
-            "name": "Compound",
+            "symbol": "MAAPL",
+            "name": "Wrapped Mirrored AAPL",
             "chainId": 1,
             "decimals": 18,
-            "address": "0xc102eF924Ea10E6cD8D2AA775b5Cd0dAb01CDB47",
-            "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "100000000000000000"
+            "address": "0xdae57d13b42325562963c1e47e615ee25924635c",
+            "initialAllocationMantissa": "0.2",
+            "initialAllocationGwei": "200000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mAAPL.svg"
           },
           {
-            "symbol": "LINK",
-            "name": "Chainlink",
+            "symbol": "MNFLX",
+            "name": "Wrapped Mirrored NFLX",
             "chainId": 1,
             "decimals": 18,
-            "address": "0xb1A69e1A38417fAaA91CA4859a2e2D5Ab3d34960",
-            "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "100000000000000000"
+            "address": "0x1EA12ca0Ac017EfFE87ddF4c648a1a5359E850FA",
+            "initialAllocationMantissa": "0.2",
+            "initialAllocationGwei": "200000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mNFLX.svg"
           },
           {
-            "symbol": "UNI",
-            "name": "Uniswap",
+            "symbol": "MGOOGL",
+            "name": "Wrapped Mirrored GOOGL",
             "chainId": 1,
             "decimals": 18,
-            "address": "0x339A8c5Fd0D82CbeFA8fBfb4333Cb5540177F672",
-            "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "100000000000000000"
+            "address": "0x58E3ba48E036341EF8Bbe0bF49caA9731Cc5C42B",
+            "initialAllocationMantissa": "0.2",
+            "initialAllocationGwei": "200000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mGOOGL.svg"
           },
-          {
-            "symbol": "AAVE",
-            "name": "Aave",
-            "chainId": 1,
-            "decimals": 18,
-            "address": "",
-            "initialAllocationMantissa": "0.1",
-            "initialAllocationGwei": "100000000000000000"
-          }
         ]
       }
     ]

@@ -27,6 +27,9 @@ func FindFunds(c *gin.Context) {
 	var funds []models.Fund
 	db.Find(&funds)
 
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
+
 	c.JSON(http.StatusOK, gin.H{"data": funds})
 }
 
