@@ -103,7 +103,5 @@ func main() {
 	// r.GET("/funds", controllers.FindFunds)
 	// r.GET("/funds/:id", controllers.FindFund)
 
-	coinmarketcap.Execute(b)
-
 	r.Run((":" + b.C.GetString("port")))
 }

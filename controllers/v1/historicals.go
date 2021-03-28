@@ -83,8 +83,8 @@ func GetHistoricals(c *gin.Context) {
 
 	prices := []map[string]interface{}{}
 
-	for timestamp := sDate; timestamp <= eDate; timestamp += MNT_INTERVAL {
-		fmt.Println("Timestamp current:", timestamp, ", DateTime:", time.Unix(int64(timestamp), 0))
+	for timestamp := sDate; timestamp <= eDate; timestamp += intervals[interval] {
+		// fmt.Println("Timestamp current:", timestamp, ", DateTime:", time.Unix(int64(timestamp), 0))
 
 		val, err := db.ZRangeByScoreWithScores(ctx, sym, &redis.ZRangeBy{
 			Min:    fmt.Sprint(timestamp - (HOR_INTERVAL * 12)),
