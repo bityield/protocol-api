@@ -1,7 +1,6 @@
 package database
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -13,7 +12,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-var ctx = context.Background()
+// var ctx = context.Background()
 
 // Connect kind of explanatory
 func Connect() *gorm.DB {
@@ -48,8 +47,17 @@ func Connect() *gorm.DB {
 		log.Fatalf("cannot migrate table: %v", err)
 	}
 
+	// Price
+	if err := db.Debug().DropTableIfExists(&models.Price{}).Error; err != nil {
+		log.Fatalf("cannot drop table: %v", err)
+	}
+
+	if err = db.Debug().AutoMigrate(&models.Price{}).Error; err != nil {
+		log.Fatalf("cannot migrate table: %v", err)
+	}
+
 	// Run seeds
-	seed(db)
+	// seed(db)
 
 	return db
 }
@@ -108,7 +116,7 @@ func seed(db *gorm.DB) {
 		}
 	}
 
-	for i, _ := range funds {
+	for i := 1; i < len(funds); i++ {
 		if err := db.Debug().Model(&models.Fund{}).Create(&funds[i]).Error; err != nil {
 			log.Fatalf("cannot seed funds table: %v", err)
 		}

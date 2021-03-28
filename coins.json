@@ -1,0 +1,32 @@
+{
+    "coins": [
+        {"symbol": "1INCH","name": "1inch"},
+        {"symbol": "AAVE", "name": "Aave"},
+        {"symbol": "ADA",  "name": "Cardano"},
+        {"symbol": "ALGO", "name": "Algorand"},
+        {"symbol": "ATOM", "name": "Cosmos"},
+        {"symbol": "BAT",  "name": "Basic Attention Token"},
+        {"symbol": "BNB",  "name": "Binance Coin"},
+        {"symbol": "BTC",  "name": "Bitcoin"},
+        {"symbol": "COMP", "name": "Compound"},
+        {"symbol": "CRV",  "name": "Curve Dao Token"},
+        {"symbol": "DAI",  "name": "Dai Stable Coin"},
+        {"symbol": "DOGE", "name": "Dogecoin"},
+        {"symbol": "DOT",  "name": "Polkadot"},
+        {"symbol": "ETH",  "name": "Ethereum"},
+        {"symbol": "GRT",  "name": "The Graph"},
+        {"symbol": "LINK", "name": "Chainlink"},
+        {"symbol": "LRC",  "name": "Loopring"},
+        {"symbol": "MKR",  "name": "Maker"},
+        {"symbol": "NEAR", "name": "NEAR Protocol"},
+        {"symbol": "PAX",  "name": "Paxos Standard"},
+        {"symbol": "TRX",  "name": "Tron"},
+        {"symbol": "SNX",  "name": "Synthetix"},
+        {"symbol": "UNI",  "name": "Uniswap"},
+        {"symbol": "USDC", "name": "USD Coin"},
+        {"symbol": "WBTC", "name": "Wrapped Bitcoin"},
+        {"symbol": "WETH", "name": "Wrapped Ethereum"},
+        {"symbol": "YFI",  "name": "Yearn.Finance"},        
+        {"symbol": "ZRX",  "name": "0x"}
+    ]
+}

@@ -6,7 +6,7 @@ cmd = "go build -o bin/api main.go"
 bin = "bin/api"
 
 # Watch these filename extensions.
-include_ext = ["go"]
+include_ext = ["go", "json"]
 
 # Ignore these filename extensions or directories.
 exclude_dir = ["tmp", "vendor"]

@@ -100,7 +100,8 @@ func LoadLogger(config Reader) *logrus.Logger {
 
 	log.Out = os.Stdout
 
-	log.SetLevel(logrus.WarnLevel)
+	// log.SetLevel(logrus.WarnLevel)
+	log.SetLevel(logrus.InfoLevel)
 
 	return log
 }

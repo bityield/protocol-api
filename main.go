@@ -2,10 +2,11 @@ package main
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/bityield/protocol-api/backend"
-	"github.com/bityield/protocol-api/controllers"
 	v1 "github.com/bityield/protocol-api/controllers/v1"
+	"github.com/bityield/protocol-api/interfaces/scrapers/coinmarketcap"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
@@ -48,10 +49,18 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func main() {
 	// Initalize a new client, the base entrpy point to the application code
-	b, e := backend.NewBackend(false, true)
+	b, e := backend.NewBackend(true, true)
 	if e != nil {
 		panic(e)
 	}
+
+	// Worker jobs
+	go func() {
+		for now := range time.Tick(time.Second * 43200) {
+			b.L.Infoln("Executing scrape job at:", now)
+			coinmarketcap.Execute(b)
+		}
+	}()
 
 	// Database connect, defer close
 	defer b.R.D.Close()
@@ -87,14 +96,14 @@ func main() {
 	r.StaticFile("/v1/indexes/kovan", "./assets/indexes/kovan/index.json")
 	r.StaticFile("/v1/indexes/ropsten", "./assets/indexes/ropsten/index.json")
 
-	r.GET("/ping", controllers.Ping)
-
 	// API Methods and endpoints
 	r.GET("/v1/historicals/:symbol", v1.GetHistoricals)
 
 	// Funds endpoints
-	r.GET("/funds", controllers.FindFunds)
-	r.GET("/funds/:id", controllers.FindFund)
+	// r.GET("/funds", controllers.FindFunds)
+	// r.GET("/funds/:id", controllers.FindFund)
+
+	coinmarketcap.Execute(b)
 
 	r.Run((":" + b.C.GetString("port")))
 }
