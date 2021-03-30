@@ -13,8 +13,9 @@
     "Indexes":[
       {
         "Name": "Bityield Market Movers Index",
+        "Slug": "bityield-market-movers-index",
         "Symbol": "BYMMI",
-        "Address": "0x0000000000000000000000000000000000000000",
+        "Address": "0xdb9b739a2c11094f3742d4f3b1a7f702a24ceadf",
         "Description": "Weighted over large cap market movers.",
         "CreatedAt": "2021-2-22",
         "Status": "active",
@@ -27,6 +28,15 @@
             "version": "0x01"
           }
         ],
+        "Stats": {
+          "Price": "372.28",
+          "Days": {
+            "1": "+1.75",
+            "30": "-3.1",
+            "90": "+272.48"
+          },
+          "MarketCap": "112.9M"
+        },
         "Assets": [
           {
             "symbol": "WBTC",
@@ -92,8 +102,9 @@
       },
       {
         "Name": "Bityield FAANG Index",
+        "Slug": "bityield-faang-index",
         "Symbol": "BYFI",
-        "Address": "0x0000000000000000000000000000000000000000",
+        "Address": "0xdb9b739A2c11094f3742d4F3b1a7F702A24CEaDf",
         "Description": "Tracking US FAANG.",
         "CreatedAt": "2021-2-22",
         "Status": "active",
@@ -106,6 +117,15 @@
             "version": "0x01"
           }
         ],
+        "Stats": {
+          "Price": "42.12",
+          "Days": {
+            "1": "+2.5",
+            "30": "-6.1",
+            "90": "+65.31"
+          },
+          "MarketCap": "64.9M"
+        },
         "Assets": [
           {
             "symbol": "MFB",
@@ -156,7 +176,7 @@
             "initialAllocationMantissa": "0.2",
             "initialAllocationGwei": "200000000000000000",
             "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mGOOGL.svg"
-          },
+          }
         ]
       }
     ]

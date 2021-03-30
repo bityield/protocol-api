@@ -13,16 +13,16 @@ type Price struct {
 	ID        uint32    `gorm:"primary_key;auto_increment" json:"id"`
 	Name      string    `gorm:"size:255;not null;" json:"name"`
 	Symbol    string    `gorm:"size:255;not null;" json:"symbol"`
-	TimeOpen  string    `gorm:"size:255;not null;" json:"time_open"`
-	TimeClose string    `gorm:"size:255;not null;" json:"time_close"`
+	TimeOpen  string    `gorm:"size:255;not null;" json:"timeOpen"`
+	TimeClose string    `gorm:"size:255;not null;" json:"timeClose"`
 	Open      float64   `gorm:"type:decimal(18,10);" json:"open"`
 	High      float64   `gorm:"type:decimal(18,10);" json:"high"`
 	Low       float64   `gorm:"type:decimal(18,10);" json:"low"`
 	Close     float64   `gorm:"type:decimal(18,10);" json:"close"`
 	Volume    float64   `gorm:"type:decimal(18,2);" json:"volume"`
-	MarketCap float64   `gorm:"type:decimal(18,2);" json:"market_cap"`
-	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
+	MarketCap float64   `gorm:"type:decimal(18,2);" json:"marketCap"`
+	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"createdAt"`
+	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updatedAt"`
 }
 
 // Prepare sets default attributes on model

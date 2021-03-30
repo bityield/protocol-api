@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/bityield/protocol-api/backend"
+	"github.com/bityield/protocol-api/controllers"
 	v1 "github.com/bityield/protocol-api/controllers/v1"
 	"github.com/bityield/protocol-api/interfaces/scrapers/coinmarketcap"
 	"github.com/gin-contrib/cors"
@@ -49,7 +50,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func main() {
 	// Initalize a new client, the base entrpy point to the application code
-	b, e := backend.NewBackend(true, true)
+	b, e := backend.NewBackend(false, true)
 	if e != nil {
 		panic(e)
 	}
@@ -93,15 +94,14 @@ func main() {
 		c.Data(200, "text/plain", []byte("OK"))
 	})
 
-	r.StaticFile("/v1/indexes/kovan", "./assets/indexes/kovan/index.json")
 	r.StaticFile("/v1/indexes/ropsten", "./assets/indexes/ropsten/index.json")
 
 	// API Methods and endpoints
 	r.GET("/v1/historicals/:symbol", v1.GetHistoricals)
 
 	// Funds endpoints
-	// r.GET("/funds", controllers.FindFunds)
-	// r.GET("/funds/:id", controllers.FindFund)
+	r.GET("/funds", controllers.FindFunds)
+	r.GET("/funds/:id", controllers.FindFund)
 
 	r.Run((":" + b.C.GetString("port")))
 }

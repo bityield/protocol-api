@@ -56,8 +56,17 @@ func Connect() *gorm.DB {
 		log.Fatalf("cannot migrate table: %v", err)
 	}
 
+	// Address
+	if err := db.Debug().DropTableIfExists(&models.Address{}).Error; err != nil {
+		log.Fatalf("cannot drop table: %v", err)
+	}
+
+	if err = db.Debug().AutoMigrate(&models.Address{}).Error; err != nil {
+		log.Fatalf("cannot migrate table: %v", err)
+	}
+
 	// Run seeds
-	// seed(db)
+	seed(db)
 
 	return db
 }
@@ -69,55 +78,46 @@ func seed(db *gorm.DB) {
 		panic(err)
 	}
 
-	indexPath := fmt.Sprintf("%s/assets/indexes", path)
-
-	files, err := ioutil.ReadDir(indexPath)
+	data, err := ioutil.ReadFile(fmt.Sprintf("%s/assets/indexes/ropsten/index.json", path))
 	if err != nil {
+		panic(err)
+	}
+
+	var body map[string]interface{}
+	if err := json.Unmarshal(data, &body); err != nil {
 		panic(err)
 	}
 
 	funds := []models.Fund{}
 
-	for _, f := range files {
-		networkFundPath := fmt.Sprintf("%s/%s/index.json", indexPath, f.Name())
+	for x, i := range body["Indexes"].([]interface{}) {
+		idx := i.(map[string]interface{})
 
-		data, err := ioutil.ReadFile(networkFundPath)
-		if err != nil {
-			panic(err)
-		}
+		assets := []models.Asset{}
 
-		var body map[string]interface{}
-		json.Unmarshal(data, &body)
+		for _, a := range idx["Assets"].([]interface{}) {
+			ast := a.(map[string]interface{})
 
-		for _, i := range body["Indexes"].([]interface{}) {
-			idx := i.(map[string]interface{})
-
-			assets := []models.Asset{}
-
-			for _, a := range idx["Assets"].([]interface{}) {
-				ast := a.(map[string]interface{})
-
-				assets = append(assets, models.Asset{
-					Name:           ast["name"].(string),
-					Symbol:         ast["symbol"].(string),
-					Address:        ast["address"].(string),
-					Decimals:       ast["decimals"].(float64),
-					AllocationGwei: ast["initialAllocationGwei"].(string),
-				})
-			}
-
-			funds = append(funds, models.Fund{
-				Name:    idx["Name"].(string),
-				Slug:    idx["Slug"].(string),
-				Address: idx["Address"].(string),
-				Network: body["Network"].(string),
-				Assets:  assets,
+			assets = append(assets, models.Asset{
+				Name:               ast["name"].(string),
+				Symbol:             ast["symbol"].(string),
+				Address:            ast["address"].(string),
+				Decimals:           ast["decimals"].(float64),
+				AllocationGwei:     ast["initialAllocationGwei"].(string),
+				AllocationMantissa: ast["initialAllocationMantissa"].(string),
 			})
 		}
-	}
 
-	for i := 1; i < len(funds); i++ {
-		if err := db.Debug().Model(&models.Fund{}).Create(&funds[i]).Error; err != nil {
+		funds = append(funds, models.Fund{
+			Name:    idx["Name"].(string),
+			Slug:    idx["Slug"].(string),
+			Icon:    idx["Icon"].(string),
+			Address: idx["Address"].(string),
+			Network: body["Network"].(string),
+			Assets:  assets,
+		})
+
+		if err := db.Debug().Model(&models.Fund{}).Create(&funds[x]).Error; err != nil {
 			log.Fatalf("cannot seed funds table: %v", err)
 		}
 	}

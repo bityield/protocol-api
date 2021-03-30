@@ -10,17 +10,18 @@ import (
 
 // Asset schema
 type Asset struct {
-	ID             uint32    `gorm:"primary_key;auto_increment" json:"id"`
-	Name           string    `gorm:"size:255;not null;" json:"name"`
-	Symbol         string    `gorm:"size:255;not null;" json:"symbol"`
-	Address        string    `gorm:"size:255;not null;" json:"address"`
-	Decimals       float64   `json:"decimals"`
-	AllocationGwei string    `json:"initialAllocationGwei"`
-	CreatedAt      time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt      time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
+	ID                 uint32    `gorm:"primary_key;auto_increment" json:"-"`
+	Name               string    `gorm:"size:255;not null;" json:"name"`
+	Symbol             string    `gorm:"size:255;not null;" json:"symbol"`
+	Address            string    `gorm:"size:255;not null;" json:"address"`
+	Decimals           float64   `json:"decimals"`
+	AllocationGwei     string    `gorm:"size:255;not null;" json:"initialAllocationGwei"`
+	AllocationMantissa string    `gorm:"size:255;not null;" json:"initialAllocationMantissa"`
+	CreatedAt          time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"createdAt"`
+	UpdatedAt          time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updatedAt"`
 
 	// Associations
-	FundID uint
+	FundID uint `gorm:"size:255;not null;" json:"-"`
 }
 
 // Prepare sets default attributes on model
@@ -33,12 +34,11 @@ func (f *Asset) Prepare() {
 
 // SaveAsset saves the model into the datbase
 func (f *Asset) SaveAsset(db *gorm.DB) (*Asset, error) {
-
-	var err error
-	err = db.Debug().Create(&f).Error
+	err := db.Debug().Create(&f).Error
 	if err != nil {
 		return &Asset{}, err
 	}
+
 	return f, nil
 }
 
