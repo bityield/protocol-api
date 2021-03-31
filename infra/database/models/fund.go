@@ -20,7 +20,7 @@ type Fund struct {
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updatedAt"`
 
 	// Associations
-	Assets []Asset
+	Assets []Asset `json:"assets"`
 }
 
 // Prepare sets default attributes on model
