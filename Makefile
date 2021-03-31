@@ -26,6 +26,12 @@ build:
 	@echo "building [api]..."
 	@go build -o bin/api main.go
 
+deploy:
+	@echo "Deploying new version..."
+	git fetch
+	git merge origin/master
+	sudo service protocol-api restart
+
 compose-down:
 	-docker stop protocol-api_protocol-api_1
 	-docker rm protocol-api_protocol-api_1
