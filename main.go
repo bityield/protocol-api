@@ -50,7 +50,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func main() {
 	// Initalize a new client, the base entrpy point to the application code
-	b, e := backend.NewBackend(false, true)
+	b, e := backend.NewBackend(true, true)
 	if e != nil {
 		panic(e)
 	}
