@@ -94,14 +94,12 @@ func main() {
 		c.Data(200, "text/plain", []byte("OK"))
 	})
 
-	r.StaticFile("/v1/indexes/ropsten", "./assets/indexes/ropsten/index.json")
-
 	// API Methods and endpoints
-	r.GET("/v1/historicals/:symbol", v1.GetHistoricals)
+	r.GET("/v1/historicals/coin/:symbol", v1.GetHistoricals)
 
 	// Funds endpoints
-	r.GET("/funds", controllers.FindFunds)
-	r.GET("/funds/:id", controllers.FindFund)
+	r.GET("/v1/funds", controllers.FindFunds)
+	r.GET("/v1/funds/:id", controllers.FindFund)
 
 	r.Run((":" + b.C.GetString("port")))
 }
