@@ -1,7 +1,6 @@
-package v1
+package coins
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -13,32 +12,8 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-var (
-	ctx = context.Background()
-
-	HOR_INTERVAL = 3600
-	DAY_INTERVAL = 86400
-	WEK_INTERVAL = 604800
-	MNT_INTERVAL = 2592000
-	YER_INTERVAL = 31536000
-
-	INT_HOR = "h"
-	INT_DAY = "d"
-	INT_WEK = "w"
-	INT_MNT = "m"
-	INT_YER = "y"
-
-	intervals = map[string]int{
-		INT_HOR: HOR_INTERVAL,
-		INT_DAY: DAY_INTERVAL,
-		INT_WEK: WEK_INTERVAL,
-		INT_MNT: MNT_INTERVAL,
-		INT_YER: YER_INTERVAL,
-	}
-)
-
-// GetHistoricals ...
-func GetHistoricals(c *gin.Context) {
+// GetCoinHistoricals ...
+func GetCoinHistoricals(c *gin.Context) {
 	db, err := controllers.GetRedis(c)
 	if err != nil {
 		panic(err)
@@ -50,7 +25,7 @@ func GetHistoricals(c *gin.Context) {
 
 	interval = c.Query("interval")
 	if interval == "" {
-		interval = INT_DAY
+		interval = controllers.INT_DAY
 	}
 
 	min = c.Query("min")
@@ -63,14 +38,18 @@ func GetHistoricals(c *gin.Context) {
 		max = "+inf"
 	}
 
-	vals, err := db.ZRangeByScoreWithScores(ctx, sym, &redis.ZRangeBy{
+	vals, err := db.ZRangeByScoreWithScores(controllers.CTX, sym, &redis.ZRangeBy{
 		Min:    min,
 		Max:    max,
 		Offset: 0,
 	}).Result()
 
 	if err != nil {
-		panic(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Record not found!",
+			"error":   err,
+		})
+		return
 	}
 
 	var sV, eV map[string]interface{}
@@ -83,17 +62,19 @@ func GetHistoricals(c *gin.Context) {
 
 	prices := []map[string]interface{}{}
 
-	for timestamp := sDate; timestamp <= eDate; timestamp += intervals[interval] {
-		// fmt.Println("Timestamp current:", timestamp, ", DateTime:", time.Unix(int64(timestamp), 0))
-
-		val, err := db.ZRangeByScoreWithScores(ctx, sym, &redis.ZRangeBy{
-			Min:    fmt.Sprint(timestamp - (HOR_INTERVAL * 12)),
-			Max:    fmt.Sprint(timestamp + (HOR_INTERVAL * 12)),
+	for timestamp := sDate; timestamp <= eDate; timestamp += controllers.Intervals[interval] {
+		val, err := db.ZRangeByScoreWithScores(controllers.CTX, sym, &redis.ZRangeBy{
+			Min:    fmt.Sprint(timestamp - (controllers.HOR_INTERVAL * 12)),
+			Max:    fmt.Sprint(timestamp + (controllers.HOR_INTERVAL * 12)),
 			Offset: 0,
 		}).Result()
 
 		if err != nil {
-			panic(err)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": "Record not found!",
+				"error":   err,
+			})
+			return
 		}
 
 		if len(val) == 0 {

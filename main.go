@@ -6,7 +6,8 @@ import (
 
 	"github.com/bityield/protocol-api/backend"
 	"github.com/bityield/protocol-api/controllers"
-	v1 "github.com/bityield/protocol-api/controllers/v1"
+	v1Coins "github.com/bityield/protocol-api/controllers/v1/historicals/coins"
+	v1Funds "github.com/bityield/protocol-api/controllers/v1/historicals/funds"
 	"github.com/bityield/protocol-api/interfaces/scrapers/coinmarketcap"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -94,12 +95,16 @@ func main() {
 		c.Data(200, "text/plain", []byte("OK"))
 	})
 
-	// API Methods and endpoints
-	r.GET("/v1/historicals/coin/:symbol", v1.GetHistoricals)
+	// Static files
+	r.StaticFile("/v1/coins", "./coins.json")
 
 	// Funds endpoints
 	r.GET("/v1/funds", controllers.FindFunds)
 	r.GET("/v1/funds/:id", controllers.FindFund)
+
+	// API Methods and endpoints
+	r.GET("/v1/historicals/coin/:symbol", v1Coins.GetCoinHistoricals)
+	r.GET("/v1/historicals/fund/:symbol", v1Funds.GetFundHistoricals)
 
 	r.Run((":" + b.C.GetString("port")))
 }
