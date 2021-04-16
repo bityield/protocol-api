@@ -12,7 +12,7 @@ import (
 type Asset struct {
 	ID                 uint32    `gorm:"primary_key;auto_increment" json:"-"`
 	Name               string    `gorm:"size:255;not null;" json:"name"`
-	Icon               string    `gorm:"size:255;not null;" json:"icon"`
+	Icon               string    `gorm:"size:1000;not null;" json:"icon"`
 	Symbol             string    `gorm:"size:255;not null;" json:"symbol"`
 	Address            string    `gorm:"size:255;not null;" json:"address"`
 	Decimals           float64   `json:"decimals"`
