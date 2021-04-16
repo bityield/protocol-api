@@ -30,6 +30,7 @@ deploy:
 	@echo "Deploying new version..."
 	git fetch
 	git merge origin/master
+	go build -o bin/api main.go
 	sudo service protocol-api restart
 
 compose-down:
