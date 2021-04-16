@@ -100,6 +100,7 @@ func seed(db *gorm.DB) {
 
 			assets = append(assets, models.Asset{
 				Name:               ast["name"].(string),
+				Icon:               ast["icon"].(string),
 				Symbol:             ast["symbol"].(string),
 				Address:            ast["address"].(string),
 				Decimals:           ast["decimals"].(float64),
