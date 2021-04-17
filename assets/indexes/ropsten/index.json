@@ -14,8 +14,8 @@
       {
         "Name": "Bityield Market Movers Index",
         "Slug": "bityield-market-movers-index",
-        "Symbol": "BYMMI",
-        "Address": "0xdb9b739a2c11094f3742d4f3b1a7f702a24ceadf",
+        "Symbol": "BYMM",
+        "Address": "0xd160c4c8b961efe389fcdcd70e7141b6bdcaaf2a",
         "Description": "Weighted over large cap market movers.",
         "CreatedAt": "2021-01-01",
         "Status": "active",
@@ -54,8 +54,8 @@
             "chainId": 1,
             "decimals": 18,
             "address": "0x3949d09628eA7a714Ea3C34cA8A520EdACf3825D",
-            "initialAllocationMantissa": "0.3",
-            "initialAllocationGwei": "300000000000000000",
+            "initialAllocationMantissa": "0.2",
+            "initialAllocationGwei": "200000000000000000",
             "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/weth.svg"
           },
           {
@@ -68,15 +68,27 @@
             "initialAllocationGwei": "100000000000000000",
             "icon": "https://github.com/bityield/uniswap-token-list/raw/master/assets/usdc.svg"
           },
+
           {
-            "symbol": "COMP",
-            "name": "Compound",
+            "symbol": "LINK",
+            "name": "Chainlink",
             "chainId": 1,
             "decimals": 18,
-            "address": "0xc102eF924Ea10E6cD8D2AA775b5Cd0dAb01CDB47",
+            "address": "0x4da61bf239b2137b2C1CB0849a68EA579468639f",
             "initialAllocationMantissa": "0.1",
             "initialAllocationGwei": "100000000000000000",
-            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/comp.svg"
+            "icon": "https://raw.githubusercontent.com/bityield/uniswap-token-list/master/assets/link.svg"
+          },
+
+          {
+            "symbol": "AAVE",
+            "name": "Aave",
+            "chainId": 1,
+            "decimals": 18,
+            "address": "0xeA39b1A163448396D7a75C9235a79fe11531F3CB",
+            "initialAllocationMantissa": "0.1",
+            "initialAllocationGwei": "100000000000000000",
+            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/AAVE.svg"
           },
           {
             "symbol": "UNI",
@@ -97,85 +109,6 @@
             "initialAllocationMantissa": "0.1",
             "initialAllocationGwei": "100000000000000000",
             "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/bat.svg"
-          }
-        ]
-      },
-      {
-        "Name": "Bityield FAANG Index",
-        "Slug": "bityield-faang-index",
-        "Symbol": "BYFI",
-        "Address": "0xdb9b739A2c11094f3742d4F3b1a7F702A24CEaDf",
-        "Description": "Tracking US FAANG.",
-        "CreatedAt": "2021-01-01",
-        "Status": "active",
-        "Version": "0x01",
-        "Icon": "https://raw.githubusercontent.com/bityield/uniswap-token-list/master/assets/funds/fang.svg",
-        "Events": [
-          {
-            "action": "creation",
-            "timestamp": 1614026660,
-            "version": "0x01"
-          }
-        ],
-        "Stats": {
-          "Price": "42.12",
-          "Days": {
-            "1": "+2.5",
-            "30": "-6.1",
-            "90": "+65.31"
-          },
-          "MarketCap": "64.9M"
-        },
-        "Assets": [
-          {
-            "symbol": "MFB",
-            "name": "Wrapped Mirrored FB",
-            "chainId": 1,
-            "decimals": 18,
-            "address": "0x0Add4875eBcbD2306921e12133feB562E1cc82b4",
-            "initialAllocationMantissa": "0.2",
-            "initialAllocationGwei": "200000000000000000",
-            "icon": "https://raw.githubusercontent.com/bityield/uniswap-token-list/master/assets/funds/facebook.svg"
-          },
-          {
-            "symbol": "MAMZN",
-            "name": "Wrapped Mirrored AMZN",
-            "chainId": 1,
-            "decimals": 18,
-            "address": "0x3210bc26eb5427d0fc19de7ab272b3bb3e4bc4b0",
-            "initialAllocationMantissa": "0.2",
-            "initialAllocationGwei": "200000000000000000",
-            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mAMZN.svg"
-          },
-          {
-            "symbol": "MAAPL",
-            "name": "Wrapped Mirrored AAPL",
-            "chainId": 1,
-            "decimals": 18,
-            "address": "0xdae57d13b42325562963c1e47e615ee25924635c",
-            "initialAllocationMantissa": "0.2",
-            "initialAllocationGwei": "200000000000000000",
-            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mAAPL.svg"
-          },
-          {
-            "symbol": "MNFLX",
-            "name": "Wrapped Mirrored NFLX",
-            "chainId": 1,
-            "decimals": 18,
-            "address": "0x1EA12ca0Ac017EfFE87ddF4c648a1a5359E850FA",
-            "initialAllocationMantissa": "0.2",
-            "initialAllocationGwei": "200000000000000000",
-            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mNFLX.svg"
-          },
-          {
-            "symbol": "MGOOGL",
-            "name": "Wrapped Mirrored GOOGL",
-            "chainId": 1,
-            "decimals": 18,
-            "address": "0x58E3ba48E036341EF8Bbe0bF49caA9731Cc5C42B",
-            "initialAllocationMantissa": "0.2",
-            "initialAllocationGwei": "200000000000000000",
-            "icon": "https://raw.githubusercontent.com/MetaMask/contract-metadata/master/images/mGOOGL.svg"
           }
         ]
       }
